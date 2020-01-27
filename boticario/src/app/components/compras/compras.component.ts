@@ -14,12 +14,14 @@ export class ComprasComponent implements OnInit {
     this.carregarCompras();
   }
 
+  //função que permite exibir a mensagem de "Bem-vindo" acompanhada do nome do usuário logado
   inserirNome(){
     var usuario = JSON.parse(localStorage.getItem('usuarioAtual'));
     var nomeCompleto = usuario.nome.split(' ');
     document.querySelector('#welcome').textContent = "Bem-vindo, " + nomeCompleto[0];
   }
 
+  //função para exibir na tabela os dados das compras anteriormente cadastradas
   carregarCompras(){
     var compras = JSON.parse(localStorage.getItem('compras'));
     compras.map(compra => {
@@ -31,12 +33,13 @@ export class ComprasComponent implements OnInit {
           <td>${compra.cashbackPercent * 100}%</td>
           <td>R$ ${compra.cashbackValor}</td>
           <td>${compra.status}</td>
-          ${this.validarBotoes(compra.status)}
+          ${this.validarBotoes(compra.status) /*chamada da função para exibição dos botões de excluir e editar */} 
         </tr>
       `);
     });
   }
 
+  //função que exibe e ativa os botões de "excluir" e "editar" nas compras cujo status é "Em validção"
   validarBotoes(status){
     if(status == "Em validação"){
       return `<td>

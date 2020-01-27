@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  //função que permite que o usuário logado saia da sua conta e retorne até a página inicial
   sair(){
     localStorage.removeItem('usuarioAtual');
     this.router.navigate(['inicio']);

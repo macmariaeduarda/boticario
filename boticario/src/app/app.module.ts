@@ -12,6 +12,7 @@ import { CashbackComponent } from './components/cashback/cashback.component';
 import { DevComponent } from './components/dev/dev.component';
 import { NavbarComponent } from './template/navbar/navbar.component';
 
+//definição das rotas para que seja possível navegar entre as páginas
 const appRoutes: Routes = [
   { path: 'inicio', component: InicioComponent },
   { path: 'sobre', component: SobreComponent },

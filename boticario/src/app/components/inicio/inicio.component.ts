@@ -22,10 +22,12 @@ export class InicioComponent implements OnInit {
 }
 
   ngOnInit() {
+    //validação dos dados inseridos pelo usuário nos campos de login
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
+    //validação dos dados inseridos pelo usuário nos campos de cadastro
     this.cadastroForm = this.formBuilder.group({
       nome: ['', [Validators.required]],
       cpf: ['', [Validators.required], [(cpf: String) => this.validarCPF(cpf)]],
@@ -35,14 +37,18 @@ export class InicioComponent implements OnInit {
     });
   }
 
+  /*função que verifica se todos os campos do login estão válidos, caso estejam,
+   a função que permite logar o usuário é chamada*/
    submitLogin() {
     if(this.loginForm.valid){
       this.validarLogin(this.loginForm);
     } else {
-      alert("Vc n preencheu tudo ou preencheu errado, animal");
+      alert("Vc n preencheu tudo ou preencheu errado");
     }
    }
 
+   /*função que verifica se todos os campos do cadastro estão válidos, caso estejam,
+   a função que permite finalizar o cadastro do usuário é chamada*/
    submitRegister() {
     if(this.cadastroForm.valid){
       this.validarCadastro(this.cadastroForm);
@@ -51,6 +57,7 @@ export class InicioComponent implements OnInit {
     }
    }
 
+   //função para a validação do campo de CPF
   validarCPF(cpfForm) {
     let promise = new Promise((resolve, reject) => {
         var cpf = cpfForm.value.replace(/\D/g, '');
@@ -91,6 +98,8 @@ export class InicioComponent implements OnInit {
     return promise;
   }
 
+  /*função que verifica se os dados inseridos nos campos de login pertencem a algum usuário
+  já registrado e se eles correspondem aos dados presentes no registro*/
   validarLogin(loginForm){
     let login = loginForm.value;
     let usuarios = JSON.parse(localStorage.getItem('usuarios'));
@@ -107,6 +116,8 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /*função que verifica se os dados inseridos nos campos de cadastro já estão presentes no registro de
+  algum usuário, caso não estejam, o cadastro é realizado*/
   validarCadastro(cadastroForm){
     let usuario = {
       nome: cadastroForm.value.nome,
@@ -132,6 +143,8 @@ export class InicioComponent implements OnInit {
     }
   }
 
+  /*função que verifica se o conteúdo inserido nos campos "senha" e "confirmar senha"
+  são iguais*/
   confirmarSenha(){
     let promise = new Promise((resolve, reject) => {
       let senha = (<HTMLInputElement>document.getElementById('senha')).value;
