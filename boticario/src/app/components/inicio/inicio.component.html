@@ -1,0 +1,65 @@
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#8dcb78">
+      <a class="navbar-brand" href="#">
+        <img src="../../assets/logo-boticario-branco.png" alt="" />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarText" style="margin-left:43em">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link textNavbar" href="#">Início<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link textNavbar" href="#" routerLink="/sobre">Sobre</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h2>Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" formControlName="email" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input type="password" formControlName="senha" class="form-control"/>
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm">
+          <h2>Registre-se</h2>
+          <form [formGroup]="cadastroForm" (ngSubmit)="submitRegister()">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input type="text" formControlName="nome" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="cpf">CPF</label>
+              <input type="text" formControlName="cpf" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" formControlName="email" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input type="password" formControlName="senha" id="senha" class="form-control" />
+            </div>
+            <div class="form-group">
+              <label for="confirmarSenha">Confirmar senha</label>
+              <input type="password" formControlName="confirmarSenha" id="confirmarSenha" class="form-control" />
+            </div>
+            <div class="form-group">
+              <button [disabled]="loading" class="btn btn-primary">Registre-se</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
