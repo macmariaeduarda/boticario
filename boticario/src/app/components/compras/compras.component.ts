@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-compras',
@@ -6,51 +8,114 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./compras.component.css']
 })
 export class ComprasComponent implements OnInit {
+  
+  closeResult: string;
+  criarForm: FormGroup;
+  editarForm: FormGroup;
+  isEditar: Boolean = true;
+  compras: any;
 
-  constructor() { }
+  constructor(
+    private modalService: NgbModal, 
+    private formBuilder: FormBuilder,
+    private form_Builder: FormBuilder
+  ) { }
 
   ngOnInit() {
+
     this.inserirNome();
-    this.carregarCompras();
+    this.compras = JSON.parse(localStorage.getItem('compras'));
   }
 
-  //função que permite exibir a mensagem de "Bem-vindo" acompanhada do nome do usuário logado
-  inserirNome(){
+   //função que permite exibir a mensagem de "Bem-vindo" acompanhada do nome do usuário logado
+   inserirNome(){
     var usuario = JSON.parse(localStorage.getItem('usuarioAtual'));
     var nomeCompleto = usuario.nome.split(' ');
     document.querySelector('#welcome').textContent = "Bem-vindo, " + nomeCompleto[0];
   }
 
-  //função para exibir na tabela os dados das compras anteriormente cadastradas
-  carregarCompras(){
-    var compras = JSON.parse(localStorage.getItem('compras'));
-    compras.map(compra => {
-      document.querySelector('#tabelaCompras').innerHTML += (`
-        <tr>
-          <td>${compra.cod}</td>
-          <td>R$ ${compra.valor}</td>
-          <td>${compra.data}</td>
-          <td>${compra.cashbackPercent * 100}%</td>
-          <td>R$ ${compra.cashbackValor}</td>
-          <td>${compra.status}</td>
-          ${this.validarBotoes(compra.status) /*chamada da função para exibição dos botões de excluir e editar */} 
-        </tr>
-      `);
+totalCashback() {
+    let total = (this.compras.valor).reduce((accumulator, currentValue) => accumulator + currentValue);
+    return total;
+}
+
+  //função para exibição do modal com o formulário de criação de uma nova compra
+  modalCriar(content){
+
+    this.criarForm = this.formBuilder.group({
+      codigo: ['', [Validators.required]],
+      valor: ['', [Validators.required]],
+      data: ['', [Validators.required]]
+    });
+
+    this.modalService.open(content,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.salvarCompra(this.criarForm);
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
-  //função que exibe e ativa os botões de "excluir" e "editar" nas compras cujo status é "Em validção"
-  validarBotoes(status){
-    if(status == "Em validação"){
-      return `<td>
-      <input type="image" width="30" height="30" class="botaoEditar" src="../../assets/editar.svg" />
-    </td>
-    <td>
-      <input type="image" width="30" height="30" src="../../assets/excluir.svg" />
-    </td>`;
+  //função para exibição do modal que permite e edição do formulário de dados da compra
+  modalEditar(contentEdit,compra){
+
+    this.editarForm = this.form_Builder.group({
+      codigo: [compra.cod, [Validators.required]],
+      valor: [compra.valor, [Validators.required]],
+      data: [compra.data, [Validators.required]]
+    });
+
+    this.modalService.open(contentEdit,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.salvarCompra(this.editarForm);
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+
+  }
+
+   //função para salvar os dados da compra inseridos no modal
+   salvarCompra(form){
+    if(form.valid){
+      let compra = {
+        cod: form.value.codigo,
+        valor: form.value.valor,
+        data: form.value.data,
+        cashbackPercent: 0.1,
+        cashbackValor: 0.1 * form.value.valor,
+        status: "Em validação"
+      };
+      var compras = JSON.parse(localStorage.getItem('compras'));
+      compras.push(compra);
+      localStorage.setItem('compras', JSON.stringify(compras));
     } else {
-      return `<td></td><td></td>`;
+      alert("Erro ao salvar a compraS");
     }
+  }
+
+  //função para fechar o modal
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }  
+
+  //função para excluir a compra
+  private excluirCompra(compraDeletar){
+    var newCompras = this.compras.filter(compra => compra.cod != compraDeletar.cod);
+    this.compras = newCompras;
+    localStorage.setItem('compras', JSON.stringify(this.compras));
+
+  }
+
+  //função de conversão de formato da data
+  converterData(data: String){
+    let split = data.split('-');
+    return `${split[2]}/${split[1]}/${split[0]}`;
   }
 
 }

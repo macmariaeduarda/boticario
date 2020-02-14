@@ -1,3 +1,21 @@
 .textNavbar{
     color: white !important;
 }
+
+.dev {
+    font-family: 'Fonte';
+    color:#608b75;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.texto {
+    color: #575858;
+    font-size: 18px;
+}
+
+.imagem {
+    width: 289px;
+    height: 289px;
+    margin-top: 30px;
+}

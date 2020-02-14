@@ -1,15 +1,16 @@
 <div>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#8dcb78">
+  <section class="cover text-center">
+    <nav class="navbar navbar-expand-lg navbar-trans navbar-light">
       <a class="navbar-brand" href="#">
-        <img src="https://boticario.vtexassets.com/_v/public/assets/v1/published/boticario.store@2.45.297/public/react/c77e2d0736b6508a15b79a27d561ed6b.svg" alt="" />
+        <img src="../../../assets/boticarioLogo3.png" class="logo" alt="" />
       </a>
       <div class="collapse navbar-collapse" id="navbarText" style="margin-left:43em">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link textNavbar" href="#">Início<span class="sr-only">(current)</span></a>
+            <a id="texto" class="nav-link textNavbar" href="#">HOME<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link textNavbar" href="#" routerLink="/sobre">Sobre</a>
+            <a id="texto" class="nav-link textNavbar" href="#">SOBRE</a>
           </li>
         </ul>
       </div>
@@ -17,49 +18,98 @@
     <div class="container">
       <div class="row">
         <div class="col-sm">
-          <h2>Login</h2>
+          <h3 class="login">LOGIN</h3>
           <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" formControlName="email" class="form-control"/>
+              <input type="email" id="input-login" placeholder="Email" formControlName="email" class="form-control transparent-input"/>
             </div>
             <div class="form-group">
-              <label for="senha">Senha</label>
-              <input type="password" formControlName="senha" class="form-control"/>
+              <input type="password" id="input-login" placeholder="Senha" formControlName="senha" class="form-control transparent-input"/>
+            </div>
+            <div>
+              <button type="button" (click)="modalRegistro(content)" class="registrar"> Ainda não é registrado? </button>
             </div>
             <div class="form-group">
-              <button [disabled]="loading" class="btn btn-primary">Login</button>
-            </div>
-          </form>
-        </div>
-        <div class="col-sm">
-          <h2>Registre-se</h2>
-          <form [formGroup]="cadastroForm" (ngSubmit)="submitRegister()">
-            <div class="form-group">
-              <label for="nome">Nome</label>
-              <input type="text" formControlName="nome" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="cpf">CPF</label>
-              <input type="text" formControlName="cpf" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" formControlName="email" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="senha">Senha</label>
-              <input type="password" formControlName="senha" id="senha" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="confirmarSenha">Confirmar senha</label>
-              <input type="password" formControlName="confirmarSenha" id="confirmarSenha" class="form-control" />
-            </div>
-            <div class="form-group">
-              <button [disabled]="loading" class="btn btn-primary">Registre-se</button>
+              <button [disabled]="loading" type="button" id="botaoEntrar" class="btn btn-primary">Login</button>
             </div>
           </form>
         </div>
       </div>
     </div>
-  </div>
+    </section>
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Registre-se</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+        <form [formGroup]="cadastroForm" (ngSubmit)="submitRegister()">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" formControlName="nome" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="cpf">CPF</label>
+            <input type="text" formControlName="cpf" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha</label>
+            <input type="password" formControlName="senha" id="senha" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="confirmarSenha">Confirmar senha</label>
+            <input type="password" formControlName="confirmarSenha" id="confirmarSenha" class="form-control" />
+          </div>
+          <div class="form-group">
+            <button [disabled]="loading" id="botaoRegistrar" class="btn btn-primary">Registre-se</button>
+          </div>
+        </form>
+        </div>
+      </ng-template>
+    <div class="secao">
+    <div>
+      <h2 class="sobre">SOBRE</h2>
+      <p class="descricao">Seja bem-vindo ao programa de cashback do O Boticário! Com ele, 
+        você pode garantir uma porcentagem do seu dinheiro de volta por cada compra realizada! 
+        Quer participar? Basta seguir as seguintes etapas:</p>
+      <div class="row">
+        <div class="col-sm" id="coluna">
+          <img src="../../../assets/woman.svg" class="icone" alt="" />
+        </div>
+        <div class="col-sm" id="coluna">
+          <img src="../../../assets/sales.svg" class="icone" alt="" />
+        </div>
+        <div class="col-sm" id="coluna">
+          <img src="../../../assets/bill.svg" class="icone" alt="" />
+        </div>
+        <div class="col-sm" id="coluna">
+          <img src="../../../assets/money.svg" class="icone" alt="" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm" id="coluna">
+          <p class="legenda">1. Seja um revendedor O Boticário (Acesse o <a href="#https://www.revendedor.boticario.com.br" class="link">site</a>)</p>
+        </div>
+        <div class="col-sm" id="coluna">
+          <p class="legenda">2. Registre-se no site de cashback</p>
+        </div>
+        <div class="col-sm" id="coluna">
+          <p class="legenda">3. Cadastre sua compra e aguarde a validação</p>
+        </div>
+        <div class="col-sm" id="coluna">
+          <p class="legenda">4. Pronto! Já tem seu dinheiro de volta!</p>
+        </div>
+      </div>
+    </div>
+    </div>
+    <footer class="site-footer">
+      <br>
+        <p class="copyright">© 2020 Copyright: Maria Eduarda Maciel</p>
+    </footer>
+</div>

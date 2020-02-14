@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -10,12 +11,14 @@ import { Router } from '@angular/router';
 })
 export class InicioComponent implements OnInit {
 
+  closeResult: string;
   loginForm: FormGroup;
   cadastroForm: FormGroup;
   loading = false;
   submitted = false;
 
   constructor(
+    private modalService: NgbModal, 
     private formBuilder: FormBuilder,
     private router: Router
 ) {
@@ -27,6 +30,11 @@ export class InicioComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
+    
+  }
+
+  modalRegistro(content){
+
     //validação dos dados inseridos pelo usuário nos campos de cadastro
     this.cadastroForm = this.formBuilder.group({
       nome: ['', [Validators.required]],
@@ -35,7 +43,25 @@ export class InicioComponent implements OnInit {
       senha: ['', [Validators.required]],
       confirmarSenha: ['', [Validators.required], [() => this.confirmarSenha()]]
     });
+
+    this.modalService.open(content,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.submitRegister();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
+
+  //função para fechar o modal
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  } 
 
   /*função que verifica se todos os campos do login estão válidos, caso estejam,
    a função que permite logar o usuário é chamada*/
@@ -53,7 +79,7 @@ export class InicioComponent implements OnInit {
     if(this.cadastroForm.valid){
       this.validarCadastro(this.cadastroForm);
     } else {
-      alert('User form register is not valid!!')
+      alert('Registro inválido!')
     }
    }
 
@@ -129,18 +155,14 @@ export class InicioComponent implements OnInit {
     if(usuarios.length > 0){
       usuarios.map(usuarioCadastrado => {
         if(usuarioCadastrado.email == usuario.email || usuarioCadastrado.cpf == usuario.cpf){
-          alert("Usuário já cadastrado.");
+          //alert("Usuário já cadastrado.");
         } else {
           usuarios.push(usuario);
           localStorage.setItem('usuarios', JSON.stringify(usuarios));
-          alert("Usuário cadastrado com sucesso!");
+          //alert("Usuário cadastrado com sucesso!");
         }
       });
-    } else {
-      usuarios.push(usuario);
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      alert("Usuário cadastrado com sucesso!");
-    }
+    } 
   }
 
   /*função que verifica se o conteúdo inserido nos campos "senha" e "confirmar senha"

@@ -1,3 +1,21 @@
 .textNavbar{
     color: white !important;
 }
+
+#nome {
+    font-family: 'Fonte';
+    color:#608b75;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+#email{
+    color: #575858;
+    font-size: 18px;
+}
+
+.imagem {
+    width: 289px;
+    height: 289px;
+    margin-top: 30px;
+}

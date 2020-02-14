@@ -1,15 +1,41 @@
-.textNavbar{
+
+
+.textNavbar {
     color: white !important;
 }
 
+.table {
+  background-color: #cececead;
+}
+
+#welcome {
+  padding-top: 20px;
+  font-family: 'Fonte';
+  color: #608b75;
+}
+
 .botaoEditar {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
 }
 
 .botaoExcluir {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+}
+
+#botaoSalvar {
+  background-color:#8dcb78;
+  border: none !important;
+}
+
+#novaCompra {
+  background-color:#8dcb78;
+  color:white;
+  border: none !important;
+}
+.header {
+  color: #608b75;
 }
 
 table,
@@ -19,6 +45,10 @@ tbody,
 th,
 td {
   text-align: center;
+}
+
+.linhas {
+  color: #575858;
 }
 
 .table td {

@@ -1,3 +1,134 @@
+
 .textNavbar{
     color: white !important;
+    font-family: 'Fonte';
+}
+
+.navbar-trans {
+    background: transparent;
+    border-bottom: 0.1px solid #d9d9d9;
+}
+
+.logo {
+    padding-left: 60px;
+    width:100%;
+    height:100%;
+}
+
+.cover {
+    background: #fbfcfd url(../../../assets/cash.jpeg) center;
+    background-size: cover;
+    min-height: 45rem;
+    height: auto;
+    border-radius: 0;
+    width: 100%;
+    color: #fff;
+    padding-top: 1rem; 
+}
+
+.login {
+    padding-bottom: 25px;
+    font-family: 'Fonte';
+    color: #d9d9d9;
+}
+
+.transparent-input {
+    background-color: transparent;
+    border-color: #d9d9d9;
+ }
+
+ ::placeholder {
+    color: #d9d9d9;
+  }
+
+.container {
+    padding-top: 100px;
+    width:300px;
+}
+
+.registrar {
+    background-color: transparent;
+    color: #8dcb78;
+    text-decoration: underline;
+    font-size: 14px;
+    border: none !important;
+    padding-bottom: 15px;
+}
+
+#botaoRegistrar {
+    background-color:#8dcb78;
+    border: none !important;
+    text-align: center;
+}
+
+#botaoEntrar {
+    background-color: #8dcb78;
+    border: none !important;
+}
+
+#texto {
+    padding-left: 40px;
+    font-size: 23px;
+    font-family: 'Fonte';
+}
+
+.sobre {
+    font-family: 'Fonte';
+    font-size: 35px;
+    color:#8dcb78;
+    padding-top: 30px;
+    padding-left: 30px;
+}
+
+.icone {
+    width: 80px;
+    height: 80px;
+}
+
+#coluna {
+    text-align: center;
+}
+
+.descricao {
+    font-weight: 'Fonte';
+    font-size: 20px;
+    color:#575858;
+    padding-top: 50px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+}
+
+.legenda {
+    font-weight: 'Fonte';
+    font-size: 20px;
+    color:#8dcb78;
+    padding-top: 20px;
+    text-align: center;
+    vertical-align: text-top;
+}
+
+.row {
+    padding-left: 30px;
+}
+
+.link{
+    color: #8dcb78;
+    text-decoration: underline;
+}
+
+.secao {
+    padding-bottom: 30px;
+}
+
+.site-footer{
+    background-color:#8dcb78cb;
+    height: 50px;
+
+
+}
+
+.copyright {
+    text-align: center;
+    color: white;
+    margin-bottom: 0;
 }
