@@ -5,8 +5,8 @@
             <h2 id="welcome"></h2>
             <br>
             <div>
-              <p>{{total}}</p>
-              <p>Esse é o seu valor total de cashback acumulado!</p>
+              <p id="valor-cashback">{{this.converterCashback(this.totalCashback())}}</p>
+              <p id="cashback">Esse é o seu valor total de cashback acumulado!</p>
             </div>
             <button type="button" (click)="modalCriar(content)" id="novaCompra" class="btn btn-primary"> + Nova Compra</button>
         </div>

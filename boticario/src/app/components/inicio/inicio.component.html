@@ -10,7 +10,7 @@
             <a id="texto" class="nav-link textNavbar" href="#">HOME<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a id="texto" class="nav-link textNavbar" href="#">SOBRE</a>
+            <a id="texto" class="nav-link textNavbar" (click)="modalRegistro(content)">SOBRE</a>
           </li>
         </ul>
       </div>
@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-sm">
           <h3 class="login">LOGIN</h3>
-          <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+          <form [formGroup]="loginForm">
             <div class="form-group">
               <input type="email" id="input-login" placeholder="Email" formControlName="email" class="form-control transparent-input"/>
             </div>
@@ -30,7 +30,7 @@
               <button type="button" (click)="modalRegistro(content)" class="registrar"> Ainda não é registrado? </button>
             </div>
             <div class="form-group">
-              <button [disabled]="loading" type="button" id="botaoEntrar" class="btn btn-primary">Login</button>
+              <button [disabled]="loading" type="button" (click)="submitLogin()" id="botaoEntrar" class="btn btn-primary">Login</button>
             </div>
           </form>
         </div>
@@ -72,42 +72,49 @@
         </form>
         </div>
       </ng-template>
-    <div class="secao">
-    <div>
-      <h2 class="sobre">SOBRE</h2>
-      <p class="descricao">Seja bem-vindo ao programa de cashback do O Boticário! Com ele, 
-        você pode garantir uma porcentagem do seu dinheiro de volta por cada compra realizada! 
-        Quer participar? Basta seguir as seguintes etapas:</p>
-      <div class="row">
-        <div class="col-sm" id="coluna">
-          <img src="../../../assets/woman.svg" class="icone" alt="" />
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="col-sm" id="coluna">
-          <img src="../../../assets/sales.svg" class="icone" alt="" />
+        <div class="modal-body">
+          <div>
+            <h2 class="sobre">SOBRE</h2>
+            <p class="descricao">Seja bem-vindo ao programa de cashback do O Boticário! Com ele, 
+              você pode garantir uma porcentagem do seu dinheiro de volta por cada compra realizada! 
+              Quer participar? Basta seguir as seguintes etapas:</p>
+            <div class="row">
+              <div class="col-sm" id="coluna">
+                <img src="../../../assets/woman.svg" class="icone" alt="" />
+              </div>
+              <div class="col-sm" id="coluna">
+                <img src="../../../assets/sales.svg" class="icone" alt="" />
+              </div>
+              <div class="col-sm" id="coluna">
+                <img src="../../../assets/bill.svg" class="icone" alt="" />
+              </div>
+              <div class="col-sm" id="coluna">
+                <img src="../../../assets/money.svg" class="icone" alt="" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm" id="coluna">
+                <p class="legenda">1. Seja um revendedor O Boticário (Acesse o <a href="#https://www.revendedor.boticario.com.br" class="link">site</a>)</p>
+              </div>
+              <div class="col-sm" id="coluna">
+                <p class="legenda">2. Registre-se no site de cashback</p>
+              </div>
+              <div class="col-sm" id="coluna">
+                <p class="legenda">3. Cadastre sua compra e aguarde a validação</p>
+              </div>
+              <div class="col-sm" id="coluna">
+                <p class="legenda">4. Pronto! Já tem seu dinheiro de volta!</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-sm" id="coluna">
-          <img src="../../../assets/bill.svg" class="icone" alt="" />
-        </div>
-        <div class="col-sm" id="coluna">
-          <img src="../../../assets/money.svg" class="icone" alt="" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm" id="coluna">
-          <p class="legenda">1. Seja um revendedor O Boticário (Acesse o <a href="#https://www.revendedor.boticario.com.br" class="link">site</a>)</p>
-        </div>
-        <div class="col-sm" id="coluna">
-          <p class="legenda">2. Registre-se no site de cashback</p>
-        </div>
-        <div class="col-sm" id="coluna">
-          <p class="legenda">3. Cadastre sua compra e aguarde a validação</p>
-        </div>
-        <div class="col-sm" id="coluna">
-          <p class="legenda">4. Pronto! Já tem seu dinheiro de volta!</p>
-        </div>
-      </div>
-    </div>
-    </div>
+      </ng-template>
     <footer class="site-footer">
       <br>
         <p class="copyright">© 2020 Copyright: Maria Eduarda Maciel</p>

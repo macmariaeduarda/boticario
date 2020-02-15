@@ -14,6 +14,17 @@
   color: #608b75;
 }
 
+#valor-cashback {
+  color: #8dcb78;
+  font-size: 100px;
+  text-align: center;
+}
+
+#cashback {
+  color: #8dcb78;
+  text-align: center;
+}
+
 .botaoEditar {
     width: 30px;
     height: 30px;

@@ -74,15 +74,14 @@
 
 .sobre {
     font-family: 'Fonte';
-    font-size: 35px;
+    font-size: 30px;
     color:#8dcb78;
-    padding-top: 30px;
-    padding-left: 30px;
+    padding-top: 15px;
 }
 
 .icone {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
 }
 
 #coluna {
@@ -91,33 +90,24 @@
 
 .descricao {
     font-weight: 'Fonte';
-    font-size: 20px;
+    font-size: 15px;
     color:#575858;
-    padding-top: 50px;
-    padding-left: 30px;
+    padding-top: 20px;
     padding-bottom: 30px;
 }
 
 .legenda {
     font-weight: 'Fonte';
-    font-size: 20px;
+    font-size: 15px;
     color:#8dcb78;
     padding-top: 20px;
     text-align: center;
     vertical-align: text-top;
 }
 
-.row {
-    padding-left: 30px;
-}
-
 .link{
     color: #8dcb78;
     text-decoration: underline;
-}
-
-.secao {
-    padding-bottom: 30px;
 }
 
 .site-footer{

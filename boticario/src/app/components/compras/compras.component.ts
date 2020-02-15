@@ -34,10 +34,14 @@ export class ComprasComponent implements OnInit {
     document.querySelector('#welcome').textContent = "Bem-vindo, " + nomeCompleto[0];
   }
 
-totalCashback() {
-    let total = (this.compras.valor).reduce((accumulator, currentValue) => accumulator + currentValue);
-    return total;
-}
+  totalCashback() {
+      let total = this.compras.reduce((accumulator, compra) => accumulator += compra.cashbackValor,0);
+      return total;
+  }
+
+  converterCashback(totalConvertido) {
+    return new Intl.NumberFormat('br-PT', { style: 'currency', currency: 'BRL' }).format(totalConvertido);
+  }
 
   //função para exibição do modal com o formulário de criação de uma nova compra
   modalCriar(content){
@@ -86,10 +90,17 @@ totalCashback() {
         status: "Em validação"
       };
       var compras = JSON.parse(localStorage.getItem('compras'));
-      compras.push(compra);
-      localStorage.setItem('compras', JSON.stringify(compras));
+      if(compras){
+        compras.push(compra);
+        localStorage.setItem('compras', JSON.stringify(compras));
+        window.location.reload();
+      } else {
+        var arrayCompras = [compra];
+        localStorage.setItem('compras', JSON.stringify(arrayCompras));
+        window.location.reload();
+      }
     } else {
-      alert("Erro ao salvar a compraS");
+      alert("Erro ao salvar a compra");
     }
   }
 

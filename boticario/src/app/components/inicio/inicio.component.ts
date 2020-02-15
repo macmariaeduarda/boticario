@@ -26,11 +26,23 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
     //validação dos dados inseridos pelo usuário nos campos de login
+    localStorage.removeItem('usuarioAtual');
+
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required]]
     });
     
+  }
+
+  modalSobre(contentSobre){
+
+    this.modalService.open(contentSobre,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.submitRegister();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   modalRegistro(content){
@@ -69,7 +81,7 @@ export class InicioComponent implements OnInit {
     if(this.loginForm.valid){
       this.validarLogin(this.loginForm);
     } else {
-      alert("Vc n preencheu tudo ou preencheu errado");
+      alert("Login inválido");
     }
    }
 
@@ -79,7 +91,7 @@ export class InicioComponent implements OnInit {
     if(this.cadastroForm.valid){
       this.validarCadastro(this.cadastroForm);
     } else {
-      alert('Registro inválido!')
+      alert('Registro inválido')
     }
    }
 
@@ -152,17 +164,25 @@ export class InicioComponent implements OnInit {
       senha: cadastroForm.value.senha
     };
     var usuarios = JSON.parse(localStorage.getItem("usuarios"));
-    if(usuarios.length > 0){
-      usuarios.map(usuarioCadastrado => {
-        if(usuarioCadastrado.email == usuario.email || usuarioCadastrado.cpf == usuario.cpf){
-          //alert("Usuário já cadastrado.");
-        } else {
-          usuarios.push(usuario);
-          localStorage.setItem('usuarios', JSON.stringify(usuarios));
-          //alert("Usuário cadastrado com sucesso!");
-        }
-      });
-    } 
+    if(usuarios){
+      if(usuarios.length > 0){
+        usuarios.map(usuarioCadastrado => {
+          if(usuarioCadastrado.email == usuario.email || usuarioCadastrado.cpf == usuario.cpf){
+            alert("Usuário já cadastrado.");
+          } else {
+            usuarios.push(usuario);
+            localStorage.setItem('usuarios', JSON.stringify(usuarios));
+            alert("Usuário cadastrado com sucesso!");
+          }
+        });
+      }  
+    } else {
+      var arrayUsuarios = [
+        usuario
+      ];
+      localStorage.setItem('usuarios', JSON.stringify(arrayUsuarios));
+      alert("Usuário cadastrado com sucesso!");
+    }
   }
 
   /*função que verifica se o conteúdo inserido nos campos "senha" e "confirmar senha"
@@ -182,4 +202,3 @@ export class InicioComponent implements OnInit {
   }
 
 }
-

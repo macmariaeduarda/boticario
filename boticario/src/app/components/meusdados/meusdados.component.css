@@ -2,14 +2,24 @@
     color: white !important;
 }
 
-#nome {
+#dados {
     font-family: 'Fonte';
     color:#608b75;
     padding-top: 30px;
     padding-bottom: 30px;
 }
 
+#nome {
+    color: #575858;
+    font-size: 18px;
+}
+
 #email{
+    color: #575858;
+    font-size: 18px;
+}
+
+#cpf {
     color: #575858;
     font-size: 18px;
 }
