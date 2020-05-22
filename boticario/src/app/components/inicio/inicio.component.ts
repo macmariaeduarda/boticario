@@ -165,15 +165,21 @@ export class InicioComponent implements OnInit {
     var usuarios = JSON.parse(localStorage.getItem("usuarios"));
     if(usuarios){
       if(usuarios.length > 0){
-        usuarios.map(usuarioCadastrado => {
+        var existe = false;
+        for (let i = 0; i < usuarios.length; i++) {
+          let usuarioCadastrado = usuarios[i];
           if(usuarioCadastrado.email == usuario.email || usuarioCadastrado.cpf == usuario.cpf){
+            existe = true;
             alert("Usuário já cadastrado.");
-          } else {
-            usuarios.push(usuario);
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-            alert("Usuário cadastrado com sucesso!");
-          }
-        });
+            break;
+          } 
+        }
+        if (!existe) {
+          usuarios.push(usuario);
+          localStorage.setItem('usuarios', JSON.stringify(usuarios));
+          alert("Usuário cadastrado com sucesso!");
+          return;
+        }
       }  
     } else {
       var arrayUsuarios = [
