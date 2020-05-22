@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-compras',
@@ -14,12 +15,22 @@ export class ComprasComponent implements OnInit {
   editarForm: FormGroup;
   isEditar: Boolean = true;
   compras: any;
+  mySubscription: any;
 
   constructor(
     private modalService: NgbModal, 
     private formBuilder: FormBuilder,
-    private form_Builder: FormBuilder
-  ) { }
+    private form_Builder: FormBuilder,
+    private router: Router
+  ) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.router.navigated = false;
+      }
+    });}
 
   ngOnInit() {
 
@@ -128,5 +139,14 @@ export class ComprasComponent implements OnInit {
     let split = data.split('-');
     return `${split[2]}/${split[1]}/${split[0]}`;
   }
+
+  formatarValor(valor){    
+     /* formatar float para valores em R$ */     
+     var formatter = new Intl.NumberFormat('pt-BR', {         
+       style: 'currency',         
+       currency: 'BRL',     
+      });     
+      return formatter.format(valor); }
+
 
 }

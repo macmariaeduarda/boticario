@@ -84,8 +84,8 @@
                     <td class="linhas">{{compra.cod}}</td>
                     <td class="linhas">{{compra.valor}}</td>
                     <td class="linhas">{{this.converterData(compra.data)}}</td>
-                    <td class="linhas">{{compra.cashbackPercent}}</td>
-                    <td class="linhas">{{compra.cashbackValor}}</td>
+                    <td class="linhas">{{compra.cashbackPercent}}%</td>
+                    <td class="linhas">{{this.formatarValor(compra.cashbackValor)}}</td>
                     <td class="linhas">{{compra.status}}</td>
                     <td>
                       <div *ngIf="compra.status == 'Em validação'">

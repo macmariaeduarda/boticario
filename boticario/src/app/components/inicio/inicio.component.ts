@@ -37,9 +37,8 @@ export class InicioComponent implements OnInit {
 
   modalSobre(contentSobre){
 
-    this.modalService.open(contentSobre,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(contentSobre,{ariaLabelledBy: 'modal-title-sobre'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-      this.submitRegister();
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
@@ -56,7 +55,7 @@ export class InicioComponent implements OnInit {
       confirmarSenha: ['', [Validators.required], [() => this.confirmarSenha()]]
     });
 
-    this.modalService.open(content,{ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    this.modalService.open(content,{ariaLabelledBy: 'modal-title-registro'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
       this.submitRegister();
     }, (reason) => {
